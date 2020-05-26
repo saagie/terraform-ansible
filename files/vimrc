@@ -1,0 +1,5 @@
+" Disable auto comments insertion when copy/paste
+au FileType * set fo-=c fo-=r fo-=o
+
+" Disable visual mode when selecting with mouse
+au FileType * set mouse=r
