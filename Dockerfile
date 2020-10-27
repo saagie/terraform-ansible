@@ -6,7 +6,7 @@ ADD files/kubernetes.repo /etc/yum.repos.d/kubernetes.repo
 ADD files/mongorepo.repo /etc/yum.repos.d/mongorepo.repo
 ADD files/google-cloud-sdk.repo /etc/yum.repos.d/google-cloud-sdk.repo
 
-ARG KUBE_VERSION="1.15.4"
+ARG KUBE_VERSION="1.19.3"
 
 RUN yum install epel-release -y \
     && yum install -y https://repo.ius.io/ius-release-el7.rpm \
@@ -105,17 +105,17 @@ RUN  yum remove -y autoconf automake libtool python-devel \
 
 RUN  kubectl completion bash > /etc/bash_completion.d/kubectl
 
-ARG TERRAFORM_VERSION="0.12.19"
+ARG TERRAFORM_VERSION="0.13.5"
 RUN curl https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -o terraform.zip \
  && unzip terraform.zip -d /usr/local/bin \
  && rm terraform.zip
 
-RUN curl -L https://amazon-eks.s3-us-west-2.amazonaws.com/1.13.8/2019-08-14/bin/linux/amd64/aws-iam-authenticator -o /usr/local/bin/aws-iam-authenticator \
+RUN curl -L https://amazon-eks.s3-us-west-2.amazonaws.com/1.17.9/2019-08-14/bin/linux/amd64/aws-iam-authenticator -o /usr/local/bin/aws-iam-authenticator \
  && chmod +x /usr/local/bin/aws-iam-authenticator
 
-ARG VERSION=v2.14.2
+ARG VERSION=v3.3.4
 ARG FILENAME=helm-${VERSION}-linux-amd64.tar.gz
-ARG HELM_URL=https://storage.googleapis.com/kubernetes-helm/${FILENAME}
+ARG HELM_URL=https://get.helm.sh/${FILENAME}
 RUN echo $HELM_URL\
    && curl -o /tmp/${FILENAME} ${HELM_URL} \
    && tar -zxvf /tmp/${FILENAME} -C /tmp \
