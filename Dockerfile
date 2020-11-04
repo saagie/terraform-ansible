@@ -6,6 +6,9 @@ ADD files/kubernetes.repo /etc/yum.repos.d/kubernetes.repo
 ADD files/mongorepo.repo /etc/yum.repos.d/mongorepo.repo
 ADD files/google-cloud-sdk.repo /etc/yum.repos.d/google-cloud-sdk.repo
 
+ENV LANG en_US.utf8
+ENV LC_ALL en_US.utf8
+
 ARG KUBE_VERSION="1.19.3"
 
 RUN yum install epel-release -y \
