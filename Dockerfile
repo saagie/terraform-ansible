@@ -46,7 +46,7 @@ RUN yum install epel-release -y \
 
 RUN pip install --upgrade --no-cache-dir --upgrade pip setuptools==44.1.0 \
     && pip install --no-cache-dir \
-        ansible==2.7.12 \
+        ansible==2.9.15 \
         netaddr==0.7.19 \
         pycrypto==2.6.1 \
         httpie==0.9.9 \
