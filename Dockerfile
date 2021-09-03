@@ -5,9 +5,6 @@ ADD files/vimrc /root/.vimrc
 ADD files/mongorepo.repo /etc/yum.repos.d/mongorepo.repo
 ADD files/google-cloud-sdk.repo /etc/yum.repos.d/google-cloud-sdk.repo
 
-ENV LANG en_US.utf8
-ENV LC_ALL en_US.utf8
-
 ARG KUBE_VERSION="1.20.5"
 
 RUN dnf install epel-release -y \
@@ -28,8 +25,8 @@ RUN dnf install epel-release -y \
                     unzip \
                     which \
                     groff-base \
-                    kubectl-${KUBE_VERSION} \
     && yum clean all
+
 
 # google-api required for gce_delete.py to work
 RUN pip3 install --no-cache-dir \
@@ -39,9 +36,13 @@ RUN pip3 install --no-cache-dir \
 RUN  yum remove -y autoconf automake libtool python-devel \
     && rm -rf /var/lib/rpm/*
 
-RUN  kubectl completion bash > /etc/bash_completion.d/kubectl
 
-ARG TERRAFORM_VERSION="0.14.8"
+RUN curl -L https://storage.googleapis.com/kubernetes-release/release/v${KUBE_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl \
+    && chmod +x /usr/local/bin/kubectl
+
+RUN kubectl completion bash > /etc/bash_completion.d/kubectl
+
+ARG TERRAFORM_VERSION="1.0.5"
 RUN curl https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -o terraform.zip \
  && unzip terraform.zip -d /usr/local/bin \
  && rm terraform.zip
