@@ -5,7 +5,7 @@ ADD files/vimrc /root/.vimrc
 ADD files/mongorepo.repo /etc/yum.repos.d/mongorepo.repo
 ADD files/google-cloud-sdk.repo /etc/yum.repos.d/google-cloud-sdk.repo
 
-ARG KUBE_VERSION="1.20.5"
+ARG KUBE_VERSION="1.21.8"
 
 RUN dnf install epel-release -y \
     && dnf install -y ansible \
