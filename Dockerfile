@@ -64,14 +64,5 @@ RUN curl https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform
 RUN curl -L https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/aws-iam-authenticator -o /usr/local/bin/aws-iam-authenticator \
  && chmod +x /usr/local/bin/aws-iam-authenticator
 
-ARG VERSION=v3.7.0
-ARG FILENAME=helm-${VERSION}-linux-amd64.tar.gz
-ARG HELM_URL=https://get.helm.sh/${FILENAME}
-RUN echo $HELM_URL\
-   && curl -o /tmp/${FILENAME} ${HELM_URL} \
-   && tar -zxvf /tmp/${FILENAME} -C /tmp \
-   && mv /tmp/linux-amd64/helm /usr/local/bin/helm \
-   && rm /tmp/${FILENAME}
-
 WORKDIR /
 ENTRYPOINT ["/init.sh"]
