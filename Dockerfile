@@ -7,8 +7,8 @@ ADD files/google-cloud-sdk.repo /etc/yum.repos.d/google-cloud-sdk.repo
 
 ARG KUBE_VERSION="1.21.8"
 
-RUN dnf install epel-release -y \
-    && dnf install -y ansible \
+RUN    dnf install -y epel-release \
+    && dnf install -y \
                     python3-pip \
                     python3-netaddr \
                     git \
@@ -27,6 +27,9 @@ RUN dnf install epel-release -y \
                     groff-base \
     && yum clean all
 
+RUN pip3 install --no-cache-dir \
+        cryptography==2.6.1 \
+        ansible==2.9.27
 
 # google-api required for gce_delete.py to work
 RUN pip3 install --no-cache-dir \
