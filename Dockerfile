@@ -1,5 +1,16 @@
 FROM quay.io/centos/centos:stream8
 
+RUN groupadd \
+        --gid 1000 \
+        user \
+    && \
+    useradd \
+        --uid 1000 \
+        --gid 1000 \
+        --no-create-home \
+        --shell /bin/bash \
+        user
+
 ADD files/init.sh .
 ADD files/vimrc /root/.vimrc
 ADD files/mongorepo.repo /etc/yum.repos.d/mongorepo.repo
