@@ -8,7 +8,7 @@ ADD files/google-cloud-sdk.repo /etc/yum.repos.d/google-cloud-sdk.repo
 ARG KUBE_VERSION="1.21.8"
 
 RUN dnf install epel-release -y \
-    && dnf install -y ansible \
+    && dnf install -y https://cbs.centos.org/kojifiles/packages/ansible/2.9.27/5.el8/noarch/ansible-2.9.27-5.el8.noarch.rpm \
                     python3-pip \
                     python3-netaddr \
                     git \
