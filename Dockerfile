@@ -16,7 +16,7 @@ ADD files/vimrc /root/.vimrc
 ADD files/mongorepo.repo /etc/yum.repos.d/mongorepo.repo
 ADD files/google-cloud-sdk.repo /etc/yum.repos.d/google-cloud-sdk.repo
 
-ARG KUBE_VERSION="1.21.8"
+ARG KUBE_VERSION="1.27.2"
 
 RUN dnf install epel-release -y \
     && dnf install -y https://cbs.centos.org/kojifiles/packages/ansible/2.9.27/5.el8/noarch/ansible-2.9.27-5.el8.noarch.rpm \
@@ -53,15 +53,15 @@ RUN curl -L https://storage.googleapis.com/kubernetes-release/release/v${KUBE_VE
 
 RUN kubectl completion bash > /etc/bash_completion.d/kubectl
 
-ARG TERRAFORM_VERSION="1.0.5"
+ARG TERRAFORM_VERSION="1.5.0"
 RUN curl https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -o terraform.zip \
  && unzip terraform.zip -d /usr/local/bin \
  && rm terraform.zip
 
-RUN curl -L https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/aws-iam-authenticator -o /usr/local/bin/aws-iam-authenticator \
+RUN curl -Lo /usr/local/bin/aws-iam-authenticator https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.5.9/aws-iam-authenticator_0.5.9_linux_amd64 \
  && chmod +x /usr/local/bin/aws-iam-authenticator
 
-ARG VERSION=v3.7.0
+ARG VERSION=v3.12.0
 ARG FILENAME=helm-${VERSION}-linux-amd64.tar.gz
 ARG HELM_URL=https://get.helm.sh/${FILENAME}
 RUN echo $HELM_URL\
