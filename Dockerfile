@@ -53,7 +53,7 @@ RUN curl -L https://storage.googleapis.com/kubernetes-release/release/v${KUBE_VE
 
 RUN kubectl completion bash > /etc/bash_completion.d/kubectl
 
-ARG TERRAFORM_VERSION="1.5.3"
+ARG TERRAFORM_VERSION="1.7.2"
 RUN curl https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -o terraform.zip \
  && unzip terraform.zip -d /usr/local/bin \
  && rm terraform.zip
